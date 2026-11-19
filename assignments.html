@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments | Pranav Suryawanshi</title>
+<meta name="description" content="Academic assignments">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/chatbot.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+<nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-20">
+<a href="index.html" class="text-2xl font-bold gradient-text">Pranav.</a>
+<div class="hidden md:flex space-x-8"><a href="index.html" class="nav-link text-gray-600 hover:text-indigo-600 transition">Home</a><a href="about.html" class="nav-link text-gray-600 hover:text-indigo-600 transition">About</a><a href="skills.html" class="nav-link text-gray-600 hover:text-indigo-600 transition">Skills</a><a href="projects.html" class="nav-link text-gray-600 hover:text-indigo-600 transition">Projects</a><a href="assignments.html" class="nav-link text-gray-600 hover:text-indigo-600 transition active">Assignments</a><a href="contact.html" class="nav-link text-gray-600 hover:text-indigo-600 transition">Contact</a></div>
+<button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-indigo-600" aria-label="Menu"><i class="fas fa-bars text-2xl"></i></button>
+</div></div>
+<div id="mobile-menu" class="hidden md:hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Home</a><a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">About</a><a href="skills.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Skills</a><a href="projects.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Projects</a><a href="assignments.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Assignments</a><a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Contact</a></div></div>
+</nav>
+<section class="pt-36 pb-14 bg-white relative overflow-hidden">
+<div class="absolute top-10 left-10 w-60 h-60 bg-purple-300 rounded-full mix-blend-multiply blur-xl opacity-30 animate-blob"></div>
+<div class="absolute top-10 right-10 w-60 h-60 bg-indigo-300 rounded-full mix-blend-multiply blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+<div class="relative max-w-4xl mx-auto px-4 text-center fade-in-up">
+<p class="text-indigo-600 font-semibold mb-2">My coursework</p>
+<h1 class="text-4xl md:text-6xl font-bold text-gray-900">Academic <span class="gradient-text">Assignments</span></h1>
+<p class="text-gray-600 mt-5 max-w-2xl mx-auto">JavaScript lab work for Client-Side Web Technologies, covering forms, validation, loops, functions and browser events.</p>
+<div class="flex flex-wrap justify-center gap-2 mt-5"><span class="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full">Bharati Vidyapeeth (Deemed to be) University</span><span class="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full">IMED, Pune</span><span class="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full">Subject: Client-Side Web Technologies</span><span class="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">22 assignments</span></div>
+<div class="w-20 h-1 bg-indigo-600 mx-auto rounded-full mt-6"></div>
+</div></section>
+
+<section class="py-16 bg-gray-50"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter assignments"><button type="button" data-f="All" class="chip-f px-4 py-2 rounded-full text-sm font-semibold border transition bg-indigo-600 text-white border-indigo-600 active">All</button><button type="button" data-f="Events" class="chip-f px-4 py-2 rounded-full text-sm font-semibold border transition bg-white text-gray-600 border-gray-200 hover:border-indigo-300">Events</button><button type="button" data-f="Forms" class="chip-f px-4 py-2 rounded-full text-sm font-semibold border transition bg-white text-gray-600 border-gray-200 hover:border-indigo-300">Forms</button><button type="button" data-f="Functions" class="chip-f px-4 py-2 rounded-full text-sm font-semibold border transition bg-white text-gray-600 border-gray-200 hover:border-indigo-300">Functions</button><button type="button" data-f="Programs" class="chip-f px-4 py-2 rounded-full text-sm font-semibold border transition bg-white text-gray-600 border-gray-200 hover:border-indigo-300">Programs</button></div>
+<div class="grid md:grid-cols-2 gap-6" id="assignGrid">
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Forms">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">01</span><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Forms</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Online examination form</h3><p class="text-gray-600 text-sm mb-5">Design an online examination form using HTML and JavaScript.</p>
+<a href="assignments/online-exam.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Forms">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">02</span><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Forms</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Website registration form</h3><p class="text-gray-600 text-sm mb-5">Design a registration form for a website using HTML and JavaScript.</p>
+<a href="assignments/website-registration.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Forms">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">03</span><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Forms</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Hospital registration form</h3><p class="text-gray-600 text-sm mb-5">Design a hospital registration form using HTML and JavaScript.</p>
+<a href="assignments/hospital-registration.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">04</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Student marksheet by seat number</h3><p class="text-gray-600 text-sm mb-5">Display a student's marksheet based on a specified seat number.</p>
+<a href="assignments/marksheet.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">05</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Even numbers 1–100</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to display all even numbers between 1 and 100 in an HTML page.</p>
+<a href="assignments/even-numbers.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">06</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Odd numbers 1–100</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to display all odd numbers between 1 and 100 in an HTML page.</p>
+<a href="assignments/odd-numbers.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">07</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Prime numbers 1–100</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to display all prime numbers between 1 and 100 in an HTML page.</p>
+<a href="assignments/prime-numbers.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">08</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Multiplication tables 1–30</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to display multiplication tables from 1 to 30 in an HTML page.</p>
+<a href="assignments/multiplication-tables.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">09</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Basic calculator</h3><p class="text-gray-600 text-sm mb-5">Create a calculator using JavaScript to perform basic arithmetic operations.</p>
+<a href="assignments/calculator.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Functions">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">10</span><span class="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-xs rounded-full">Functions</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Functions with parameter passing</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program demonstrating functions with parameter passing.</p>
+<a href="assignments/functions-parameters.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Events">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">11</span><span class="inline-block px-3 py-1 bg-red-100 text-red-600 text-xs rounded-full">Events</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Mouse events</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program demonstrating mouseup, onclick, dblclick, and mouseover events.</p>
+<a href="assignments/mouse-events.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Events">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">12</span><span class="inline-block px-3 py-1 bg-red-100 text-red-600 text-xs rounded-full">Events</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Current date and time</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to display the current date and time in a message box.</p>
+<a href="assignments/date-time.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Forms">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">13</span><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Forms</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Login page validation</h3><p class="text-gray-600 text-sm mb-5">Create a login page with username and password fields. Check whether the input fields are blank and display appropriate messages.</p>
+<a href="assignments/login-validation.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">14</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Factorial</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to calculate the factorial of a given number.</p>
+<a href="assignments/factorial.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Events">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">15</span><span class="inline-block px-3 py-1 bg-red-100 text-red-600 text-xs rounded-full">Events</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">setInterval() and clearInterval()</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program demonstrating the use of setInterval() and clearInterval().</p>
+<a href="assignments/set-interval.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">16</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Fibonacci across two pages</h3><p class="text-gray-600 text-sm mb-5">Create two HTML pages. When the user clicks the Show button on the first page, display the first 10 terms of the Fibonacci series in a text box on the second page. Provide a Back button to return to the first page.</p>
+<a href="assignments/fibonacci-start.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Forms">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">17</span><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Forms</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Dropdown to text box (max 10)</h3><p class="text-gray-600 text-sm mb-5">Create a dropdown list containing numbers. When the user clicks the → button, append the selected number to a text box. Allow a maximum of 10 numbers.</p>
+<a href="assignments/dropdown-append.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Functions">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">18</span><span class="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-xs rounded-full">Functions</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Maximum of two numbers</h3><p class="text-gray-600 text-sm mb-5">Create a web page with two text boxes to accept numbers and display the maximum of the two numbers.</p>
+<a href="assignments/maximum-of-two.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Functions">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">19</span><span class="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-xs rounded-full">Functions</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Arithmetic with functions</h3><p class="text-gray-600 text-sm mb-5">Create a web page with two text boxes and JavaScript functions to perform addition, subtraction, multiplication, and division.</p>
+<a href="assignments/arithmetic-functions.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Forms">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">20</span><span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">Forms</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Student registration validation</h3><p class="text-gray-600 text-sm mb-5">Create a student registration form and validate required fields, email address, and mobile number using JavaScript.</p>
+<a href="assignments/student-registration.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Programs">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">21</span><span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-xs rounded-full">Programs</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Replace letter m with a</h3><p class="text-gray-600 text-sm mb-5">Write a JavaScript program to find all occurrences of the letter m in a user-entered string, replace them with a, and display the modified string on the page.</p>
+<a href="assignments/replace-letter-m.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+<div class="assignment bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition flex flex-col" data-cat="Events">
+<div class="flex justify-between items-center mb-3"><span class="text-sm font-semibold text-gray-400">22</span><span class="inline-block px-3 py-1 bg-red-100 text-red-600 text-xs rounded-full">Events</span></div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">Print multiplication table</h3><p class="text-gray-600 text-sm mb-5">Create an HTML page with a text box, a Print Table button, and a text area. On clicking the button, display the multiplication table of the entered number. If the input is not a valid number, change the background colour to red and display an alert message.</p>
+<a href="assignments/print-table.html" class="mt-auto self-start inline-block px-5 py-2 bg-indigo-600 text-white text-sm rounded-full font-semibold hover:bg-indigo-700 hover:shadow-lg transition">Run demo &amp; view code <i class="fas fa-arrow-up-right-from-square ml-1 text-xs"></i></a></div>
+</div></div></section>
+<section class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center"><div class="max-w-3xl mx-auto px-4">
+<h2 class="text-3xl font-bold mb-4">Let’s work together</h2><p class="mb-6 text-indigo-100">Open to internships, collaborations and entry-level software development opportunities.</p>
+<a href="contact.html" class="inline-block px-8 py-3 bg-white text-indigo-600 rounded-full font-semibold hover:shadow-lg transition">Contact Me</a></div></section>
+<footer class="bg-gray-900 text-white py-10">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<div class="flex justify-center gap-5 mb-5 text-xl" data-social></div>
+<p class="mb-2">&copy; <span data-year>2026</span> Pranav Suryawanshi. All Rights Reserved.</p>
+<p class="text-gray-400 text-sm">Designed and Developed by Pranav Suryawanshi.</p>
+</div></footer>
+<script>
+document.querySelectorAll('.chip-f').forEach(function(c){c.addEventListener('click',function(){
+  document.querySelectorAll('.chip-f').forEach(function(x){
+    var on=x===c;
+    x.classList.toggle('active',on);
+    ['bg-indigo-600','text-white','border-indigo-600'].forEach(function(k){x.classList.toggle(k,on)});
+    ['bg-white','text-gray-600','border-gray-200'].forEach(function(k){x.classList.toggle(k,!on)});
+  });
+  document.querySelectorAll('.assignment').forEach(function(a){a.hidden=c.dataset.f!=='All'&&a.dataset.cat!==c.dataset.f});
+})});
+</script>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/whatsapp.js"></script>
+<script src="assets/chatbot.js"></script>
+</body></html>

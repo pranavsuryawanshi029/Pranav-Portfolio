@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Replace letter m with a | Lab Assignment 21</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="lab.css"></head><body>
+<header class="bar"><div class="bar-in"><a href="../index.html" class="logo gradient-text">Pranav.</a><nav class="links"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../skills.html">Skills</a><a href="../projects.html">Projects</a><a href="../assignments.html" class="active">Assignments</a><a href="../contact.html">Contact</a></nav></div></header>
+<main class="wrap"><div class="crumb"><a href="../assignments.html">&larr; All assignments</a><span>Assignment 21 of 22</span></div><p class="eyebrow">Client-Side Web Technologies &middot; Lab assignment 21</p><h1>Replace letter m with a</h1>
+<p class="q"><strong>Question:</strong> Write a JavaScript program to find all occurrences of the letter m in a user-entered string, replace them with a, and display the modified string on the page.</p>
+<section class="card">
+<label for="txt">Enter a string</label>
+<input id="txt" value="my mom makes marvelous mango milkshake">
+<button id="go">Find and replace</button>
+<div id="out"></div>
+</section>
+<details class="code"><summary>View source code (HTML + JavaScript)</summary><pre><code>&lt;label for=&quot;txt&quot;&gt;Enter a string&lt;/label&gt;
+&lt;input id=&quot;txt&quot; value=&quot;my mom makes marvelous mango milkshake&quot;&gt;
+&lt;button id=&quot;go&quot;&gt;Find and replace&lt;/button&gt;
+&lt;div id=&quot;out&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+document.getElementById(&quot;go&quot;).addEventListener(&quot;click&quot;, function () {
+  const s = document.getElementById(&quot;txt&quot;).value;
+  const out = document.getElementById(&quot;out&quot;);
+  if (s === &quot;&quot;) { out.innerHTML = &#x27;&lt;div class=&quot;msg show err&quot;&gt;Please enter a string.&lt;/div&gt;&#x27;; return; }
+  let count = 0, positions = [], result = &quot;&quot;;
+  for (let i = 0; i &lt; s.length; i++) {
+    if (s[i] === &quot;m&quot; || s[i] === &quot;M&quot;) {      // find every m (either case)
+      count++;
+      positions.push(i);
+      result += s[i] === &quot;m&quot; ? &quot;a&quot; : &quot;A&quot;;    // replace with a
+    } else {
+      result += s[i];
+    }
+  }
+  const p = document.createElement(&quot;div&quot;);
+  p.className = &quot;msg show ok&quot;;
+  p.innerHTML = &quot;&lt;strong&gt;Original:&lt;/strong&gt; &lt;span id=o&gt;&lt;/span&gt;&lt;br&gt;&lt;strong&gt;Occurrences of m:&lt;/strong&gt; &quot; + count +
+    (count ? &quot; (at index &quot; + positions.join(&quot;, &quot;) + &quot;)&quot; : &quot;&quot;) + &quot;&lt;br&gt;&lt;strong&gt;Modified:&lt;/strong&gt; &lt;span id=r&gt;&lt;/span&gt;&quot;;
+  out.innerHTML = &quot;&quot;; out.appendChild(p);
+  document.getElementById(&quot;o&quot;).textContent = s;
+  document.getElementById(&quot;r&quot;).textContent = result;
+});
+&lt;/script&gt;</code></pre></details>
+<nav class="pager"><a href="student-registration.html">&larr; Student registration validation</a><a href="print-table.html">Print multiplication table &rarr;</a></nav></main><footer class="site-foot"><p>&copy; <span id="yr"></span> Pranav Suryawanshi. All Rights Reserved.</p><p class="sub">Designed and Developed by Pranav Suryawanshi.</p></footer><script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById("go").addEventListener("click", function () {
+  const s = document.getElementById("txt").value;
+  const out = document.getElementById("out");
+  if (s === "") { out.innerHTML = '<div class="msg show err">Please enter a string.</div>'; return; }
+  let count = 0, positions = [], result = "";
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "m" || s[i] === "M") {      // find every m (either case)
+      count++;
+      positions.push(i);
+      result += s[i] === "m" ? "a" : "A";    // replace with a
+    } else {
+      result += s[i];
+    }
+  }
+  const p = document.createElement("div");
+  p.className = "msg show ok";
+  p.innerHTML = "<strong>Original:</strong> <span id=o></span><br><strong>Occurrences of m:</strong> " + count +
+    (count ? " (at index " + positions.join(", ") + ")" : "") + "<br><strong>Modified:</strong> <span id=r></span>";
+  out.innerHTML = ""; out.appendChild(p);
+  document.getElementById("o").textContent = s;
+  document.getElementById("r").textContent = result;
+});
+</script></body></html>

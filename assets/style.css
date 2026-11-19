@@ -1,0 +1,15 @@
+:root{--primary-blue:#4f46e5;--secondary-purple:#9333ea}
+body{font-family:'Poppins',sans-serif;overflow-x:hidden;scroll-behavior:smooth}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#f1f1f1}
+::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,var(--primary-blue),var(--secondary-purple));border-radius:4px}
+.fade-in-up{animation:fadeInUp .8s ease-out forwards;opacity:0;transform:translateY(20px)}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+.animate-blob{animation:blob 8s infinite}
+.animation-delay-2000{animation-delay:2s}
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.1)}66%{transform:translate(-20px,20px) scale(.9)}}
+.gradient-text{background:linear-gradient(to right,var(--primary-blue),var(--secondary-purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.project-card{transition:transform .3s,box-shadow .3s}
+.project-card:hover{transform:translateY(-5px);box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04)}
+.nav-link.active{color:var(--primary-blue);font-weight:600}
+.whatsapp-float{position:fixed;bottom:20px;left:20px;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:2px 2px 10px rgba(0,0,0,.2);z-index:1000;transition:transform .3s}
+.whatsapp-float:hover{transform:scale(1.1)}
