@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+</head>
+<body>
+
+<select id="type">
+    <option>income</option>
+    <option>expense</option>
+</select>
+
+<input id="category" placeholder="Category">
+<input id="amount" type="number" placeholder="Amount">
+<input id="date" type="date">
+
+<button id="add">Add</button>
+
+<p>Filter by month: <input id="month" type="month"></p>
+
+<div id="summary"></div>
+<table id="list" border="1"></table>
+
+<script>
+const $ = id => document.getElementById(id);
+const BUDGET = 10000;
+
+let records = JSON.parse(localStorage.getItem("expenses")) || [];
+
+function save() {
+    localStorage.setItem("expenses", JSON.stringify(records));
+}
+
+function render() {
+    const month = $("month").value;
+
+    const filtered = records.filter(r =>
+        !month || r.date.startsWith(month)
+    );
+
+    const sum = type => filtered
+        .filter(r => r.type === type)
+        .reduce((s, r) => s + r.amount, 0);
+
+    const income = sum("income");
+    const expense = sum("expense");
+
+    const byCategory = {};
+
+    filtered.filter(r => r.type === "expense").forEach(r =>
+        byCategory[r.category] =
+            (byCategory[r.category] || 0) + r.amount
+    );
+
+    $("summary").innerHTML = `
+        <p>Income: ${income} | Expense: ${expense}
+        | Balance: ${income - expense}</p>
+
+        <p>By category:
+        ${Object.entries(byCategory)
+            .map(([c, v]) => `${c} = ${v}`).join(", ") || "-"}</p>
+
+        ${expense > BUDGET
+            ? `<p style="color:red">Budget alert: expenses exceed ${BUDGET}</p>`
+            : ""}
+    `;
+
+    $("list").innerHTML =
+        "<tr><th>Date</th><th>Type</th><th>Category</th><th>Amount</th></tr>" +
+
+        filtered.map(r => `
+            <tr>
+                <td>${r.date}</td>
+                <td>${r.type}</td>
+                <td>${r.category}</td>
+                <td>${r.amount}</td>
+            </tr>
+        `).join("");
+}
+
+$("add").addEventListener("click", () => {
+    const amount = parseFloat($("amount").value);
+
+    if (!$("category").value.trim() || !(amount > 0) || !$("date").value)
+        return alert("Fill all fields correctly");
+
+    records.push({
+        type: $("type").value,
+        category: $("category").value.trim(),
+        amount,
+        date: $("date").value
+    });
+
+    save();
+    render();
+});
+
+$("month").addEventListener("change", render);
+
+render();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Portal</title>
+</head>
+<body>
+
+<nav>
+    <button onclick="showSection('profile')">Profile</button>
+    <button onclick="showSection('exams')">Exams</button>
+    <button onclick="showSection('results')">Results</button>
+    <button onclick="showSection('fees')">Fees</button>
+    <button onclick="showSection('notices')">Notifications</button>
+    <button onclick="showSection('form')">Form Submission</button>
+</nav>
+
+<div id="content"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const data = JSON.parse(localStorage.getItem("portal")) || {
+    profile: { name: "Student", rollNo: "MCA101", course: "MCA" },
+    exams: [{ subject: "JavaScript", date: "2026-12-05" }],
+    results: [{ subject: "JavaScript", marks: 78 }],
+    fees: { total: 50000, paid: 30000 },
+    notices: ["Exam form deadline: 30 Nov"],
+    forms: []
+};
+
+function save() {
+    localStorage.setItem("portal", JSON.stringify(data));
+}
+
+const views = {
+    profile: () => `
+        <h3>Profile</h3>
+        <p>Name: ${data.profile.name}</p>
+        <p>Roll No: ${data.profile.rollNo}</p>
+        <p>Course: ${data.profile.course}</p>
+    `,
+
+    exams: () => `
+        <h3>Exam Details</h3>
+        <ul>${data.exams.map(e =>
+            `<li>${e.subject} on ${e.date}</li>`
+        ).join("")}</ul>
+    `,
+
+    results: () => `
+        <h3>Results</h3>
+        <ul>${data.results.map(r =>
+            `<li>${r.subject}: ${r.marks}</li>`
+        ).join("")}</ul>
+    `,
+
+    fees: () => `
+        <h3>Fees</h3>
+        <p>Total: ${data.fees.total}</p>
+        <p>Paid: ${data.fees.paid}</p>
+        <p>Due: ${data.fees.total - data.fees.paid}</p>
+    `,
+
+    notices: () => `
+        <h3>Notifications</h3>
+        <ul>${data.notices.map(n =>
+            `<li>${n}</li>`
+        ).join("")}</ul>
+    `,
+
+    form: () => `
+        <h3>Form Submission</h3>
+        <input id="formName" placeholder="Form name">
+        <button onclick="submitForm()">Submit</button>
+        <ul>${data.forms.map(f =>
+            `<li>${f}</li>`
+        ).join("")}</ul>
+    `
+};
+
+function showSection(name) {
+    $("content").innerHTML = views[name]();
+}
+
+function submitForm() {
+    const value = $("formName").value.trim();
+
+    if (value.length < 3)
+        return alert("Enter a valid form name");
+
+    data.forms.push(value);
+    save();
+    showSection("form");
+}
+
+showSection("profile");
+
+</script>
+</body>
+</html>

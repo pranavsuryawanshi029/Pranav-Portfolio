@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Board</title>
+</head>
+<body>
+
+<input id="title" placeholder="Task title">
+
+<select id="priority">
+    <option>High</option>
+    <option>Medium</option>
+    <option>Low</option>
+</select>
+
+<input id="deadline" type="date">
+<button id="addTask">Add Task</button>
+
+<input id="search" placeholder="Search tasks">
+
+<select id="filterPriority">
+    <option>All</option>
+    <option>High</option>
+    <option>Medium</option>
+    <option>Low</option>
+</select>
+
+<div id="board"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const COLUMNS = ["Pending", "In Progress", "Completed"];
+
+let tasks = [], nextId = 1;
+
+function render() {
+    const term = $("search").value.toLowerCase();
+    const pf = $("filterPriority").value;
+
+    const visible = tasks.filter(t =>
+        t.title.toLowerCase().includes(term) &&
+        (pf === "All" || t.priority === pf)
+    );
+
+    $("board").innerHTML = COLUMNS.map(col => `
+        <div style="display:inline-block;vertical-align:top;
+        width:30%;min-height:200px;border:1px solid #999;
+        margin:4px;padding:6px"
+        ondragover="event.preventDefault()"
+        ondrop="drop(event, '${col}')">
+
+            <h3>${col}</h3>
+
+            ${visible.filter(t => t.status === col).map(t => `
+                <div draggable="true"
+                ondragstart="event.dataTransfer.setData('text', '${t.id}')"
+                style="border:1px solid #ccc;margin:4px;padding:4px">
+
+                    <b>${t.title}</b> [${t.priority}]<br>
+                    Due: ${t.deadline || "-"}<br>
+
+                    <button onclick="editTask(${t.id})">Edit</button>
+                    <button onclick="deleteTask(${t.id})">Delete</button>
+
+                </div>
+            `).join("")}
+
+        </div>
+    `).join("");
+}
+
+function drop(event, status) {
+    event.preventDefault();
+
+    const id = Number(event.dataTransfer.getData("text"));
+    tasks.find(t => t.id === id).status = status;
+
+    render();
+}
+
+function editTask(id) {
+    const t = tasks.find(t => t.id === id);
+    const title = prompt("Edit title", t.title);
+
+    if (title && title.trim())
+        t.title = title.trim();
+
+    render();
+}
+
+function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    render();
+}
+
+$("addTask").addEventListener("click", () => {
+    if (!$("title").value.trim())
+        return alert("Title is required");
+
+    tasks.push({
+        id: nextId++,
+        title: $("title").value.trim(),
+        priority: $("priority").value,
+        deadline: $("deadline").value,
+        status: "Pending"
+    });
+
+    $("title").value = "";
+    render();
+});
+
+$("search").addEventListener("input", render);
+$("filterPriority").addEventListener("change", render);
+
+render();
+
+</script>
+</body>
+</html>

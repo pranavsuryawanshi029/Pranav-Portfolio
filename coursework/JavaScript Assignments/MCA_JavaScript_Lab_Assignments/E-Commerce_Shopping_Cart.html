@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+</head>
+<body>
+
+<input id="search" placeholder="Search product">
+
+<select id="category">
+    <option value="All">All</option>
+    <option>Electronics</option>
+    <option>Books</option>
+</select>
+
+<div id="products"></div>
+
+<h3>Cart</h3>
+<div id="cart"></div>
+
+<input id="coupon" placeholder="Coupon code">
+<button id="applyCoupon">Apply</button>
+
+<div id="invoice"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const products = [
+    { id: 1, name: "Laptop", category: "Electronics", price: 50000 },
+    { id: 2, name: "Headphones", category: "Electronics", price: 2000 },
+    { id: 3, name: "JavaScript Book", category: "Books", price: 600 }
+];
+
+const coupons = {
+    SAVE10: subtotal => subtotal * 0.10,
+    FLAT500: () => 500
+};
+
+const TAX_RATE = 0.18;
+let cart = [];
+let activeCoupon = null;
+
+function renderProducts() {
+    const term = $("search").value.toLowerCase();
+    const cat = $("category").value;
+
+    const list = products.filter(p =>
+        p.name.toLowerCase().includes(term) &&
+        (cat === "All" || p.category === cat)
+    );
+
+    $("products").innerHTML = list.map(p =>
+        `<div>${p.name} (${p.category}) Rs.${p.price}
+        <button onclick="addToCart(${p.id})">Add</button></div>`
+    ).join("");
+}
+
+function addToCart(id) {
+    const item = cart.find(c => c.product.id === id);
+
+    if (item) item.qty++;
+    else cart.push({
+        product: products.find(p => p.id === id),
+        qty: 1
+    });
+
+    renderCart();
+}
+
+function changeQty(id, delta) {
+    const item = cart.find(c => c.product.id === id);
+    item.qty += delta;
+
+    cart = cart.filter(c => c.qty > 0);
+    renderCart();
+}
+
+function renderCart() {
+    $("cart").innerHTML = cart.length
+        ? cart.map(c =>
+            `<div>${c.product.name} x ${c.qty}
+            <button onclick="changeQty(${c.product.id}, 1)">+</button>
+            <button onclick="changeQty(${c.product.id}, -1)">-</button>
+            </div>`
+        ).join("")
+        : "<p>Cart is empty</p>";
+
+    makeInvoice();
+}
+
+function makeInvoice() {
+    const subtotal = cart.reduce(
+        (s, c) => s + c.product.price * c.qty, 0
+    );
+
+    const disc = activeCoupon
+        ? Math.min(coupons[activeCoupon](subtotal), subtotal)
+        : 0;
+
+    const taxable = subtotal - disc;
+    const tax = taxable * TAX_RATE;
+
+    $("invoice").innerHTML = `
+        <h3>Invoice</h3>
+        <p>Subtotal: Rs.${subtotal.toFixed(2)}</p>
+        <p>Discount: Rs.${disc.toFixed(2)}</p>
+        <p>Tax (18%): Rs.${tax.toFixed(2)}</p>
+        <p><b>Total: Rs.${(taxable + tax).toFixed(2)}</b></p>
+    `;
+}
+
+$("applyCoupon").addEventListener("click", () => {
+    const code = $("coupon").value.trim().toUpperCase();
+
+    if (!(code in coupons))
+        return alert("Invalid coupon");
+
+    activeCoupon = code;
+    makeInvoice();
+});
+
+$("search").addEventListener("input", renderProducts);
+$("category").addEventListener("change", renderProducts);
+
+renderProducts();
+renderCart();
+
+</script>
+</body>
+</html>

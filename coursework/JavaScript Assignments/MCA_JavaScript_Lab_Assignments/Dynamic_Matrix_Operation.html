@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matrix Operations</title>
+</head>
+<body>
+
+<div id="out"></div>
+
+<script>
+const A = JSON.parse(prompt("Matrix A:", "[[1,2],[3,4]]"));
+const B = JSON.parse(prompt("Matrix B:", "[[5,6],[7,8]]"));
+
+const $ = id => document.getElementById(id);
+const dims = M => [M.length, M[0].length];
+
+function add(A, B) {
+    const [r1, c1] = dims(A);
+    const [r2, c2] = dims(B);
+
+    if (r1 !== r2 || c1 !== c2)
+        throw new Error("Addition needs equal dimensions");
+
+    return A.map((row, i) =>
+        row.map((v, j) => v + B[i][j])
+    );
+}
+
+function subtract(A, B) {
+    const [r1, c1] = dims(A);
+    const [r2, c2] = dims(B);
+
+    if (r1 !== r2 || c1 !== c2)
+        throw new Error("Subtraction needs equal dimensions");
+
+    return A.map((row, i) =>
+        row.map((v, j) => v - B[i][j])
+    );
+}
+
+function multiply(A, B) {
+    const [r1, c1] = dims(A);
+    const [r2, c2] = dims(B);
+
+    if (c1 !== r2)
+        throw new Error("Columns of A must equal rows of B");
+
+    return A.map(row =>
+        Array.from({ length: c2 }, (_, j) =>
+            row.reduce((sum, v, k) => sum + v * B[k][j], 0)
+        )
+    );
+}
+
+function transpose(M) {
+    return M[0].map((_, j) => M.map(row => row[j]));
+}
+
+function run(title, fn) {
+    try {
+        const result = fn();
+        $("out").innerHTML += `
+            <h3>${title}</h3>
+            <pre>${result.map(r => r.join(" ")).join("\n")}</pre>
+        `;
+    } catch (e) {
+        $("out").innerHTML += `<p><b>${title}:</b> ${e.message}</p>`;
+    }
+}
+
+run("A + B", () => add(A, B));
+run("A - B", () => subtract(A, B));
+run("A x B", () => multiply(A, B));
+run("Transpose of A", () => transpose(A));
+
+</script>
+</body>
+</html>
