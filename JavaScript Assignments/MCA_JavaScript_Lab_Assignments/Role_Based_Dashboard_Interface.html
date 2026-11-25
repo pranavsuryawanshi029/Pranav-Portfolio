@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Role Dashboard</title>
+</head>
+<body>
+
+<select id="role">
+    <option value="admin">Admin</option>
+    <option value="faculty">Faculty</option>
+    <option value="student">Student</option>
+</select>
+
+<nav id="menu"></nav>
+<div id="content"></div>
+<div id="actions"></div>
+
+<script>
+// Client-side restriction for demonstration only
+const $ = id => document.getElementById(id);
+
+const config = {
+    admin: {
+        menu: ["Students", "Faculty", "Results", "Fees"],
+        actions: ["Add User", "Delete User", "Edit Results"]
+    },
+    faculty: {
+        menu: ["Students", "Results"],
+        actions: ["Edit Results"]
+    },
+    student: {
+        menu: ["Results", "Fees"],
+        actions: []
+    }
+};
+
+const sampleData = {
+    Students: "List of 120 students",
+    Faculty: "List of 15 faculty members",
+    Results: "Semester results",
+    Fees: "Fee status: paid"
+};
+
+let currentRole = "admin";
+
+function setRole(role) {
+    currentRole = role;
+
+    $("menu").innerHTML = config[role].menu
+        .map(m => `<button onclick="show('${m}')">${m}</button>`)
+        .join(" ");
+
+    $("actions").innerHTML = config[role].actions
+        .map(a => `<button onclick="doAction('${a}')">${a}</button>`)
+        .join(" ") || "<p>No actions</p>";
+
+    $("content").textContent = "Select an option from the menu";
+}
+
+function show(section) {
+    if (!config[currentRole].menu.includes(section))
+        return alert("Access denied");
+
+    $("content").textContent = sampleData[section];
+}
+
+function doAction(action) {
+    if (!config[currentRole].actions.includes(action))
+        return alert("Access denied");
+
+    alert(action + " performed");
+}
+
+$("role").addEventListener("change", e =>
+    setRole(e.target.value)
+);
+
+setRole("admin");
+
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Analytics</title>
+</head>
+<body>
+
+<h2>Student Performance Analytics</h2>
+<div id="out"></div>
+
+<script>
+const SUBJECT_MAX = 100;
+
+const students = [
+    { name: "Shivam", marks: [78, 85, 90] },
+    { name: "Ayush", marks: [45, 60, 38] },
+    { name: "Rushiraj", marks: [92, 88, 95] }
+];
+
+const $ = id => document.getElementById(id);
+
+function grade(p) {
+    if (p >= 90) return "A+";
+    if (p >= 75) return "A";
+    if (p >= 60) return "B";
+    if (p >= 40) return "C";
+    return "F";
+}
+
+const rows = students.map(s => {
+    const total = s.marks.reduce((a, b) => a + b, 0);
+    const max = s.marks.length * SUBJECT_MAX;
+    const pct = (total / max) * 100;
+
+    return {
+        name: s.name,
+        total,
+        pct,
+        grade: grade(pct),
+        status: s.marks.every(m => m >= 40) ? "Pass" : "Fail"
+    };
+}).sort((a, b) => b.total - a.total);
+
+rows.forEach((r, i) => r.rank = i + 1);
+
+const classAvg = rows.reduce((s, r) => s + r.pct, 0) / rows.length;
+const topper = rows[0];
+
+$("out").innerHTML = `
+    <table border="1">
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Total</th>
+            <th>%</th>
+            <th>Grade</th>
+            <th>Status</th>
+        </tr>
+        ${rows.map(r => `
+            <tr>
+                <td>${r.rank}</td>
+                <td>${r.name}</td>
+                <td>${r.total}</td>
+                <td>${r.pct.toFixed(2)}</td>
+                <td>${r.grade}</td>
+                <td>${r.status}</td>
+            </tr>
+        `).join("")}
+    </table>
+
+    <p>Class average: ${classAvg.toFixed(2)}%</p>
+    <p>Topper: ${topper.name}</p>
+`;
+
+</script>
+</body>
+</html>

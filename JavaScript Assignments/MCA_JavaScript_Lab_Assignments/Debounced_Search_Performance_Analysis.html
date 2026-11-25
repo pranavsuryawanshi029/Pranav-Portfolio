@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debounced Search</title>
+</head>
+<body>
+
+<input id="basic" placeholder="Basic search">
+<input id="debounced" placeholder="Debounced search">
+
+<p id="stats"></p>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const records = Array.from(
+    { length: 10000 },
+    (_, i) => ({ id: i, name: "Item " + i })
+);
+
+function search(term) {
+    return records.filter(r =>
+        r.name.toLowerCase().includes(term)
+    );
+}
+
+function debounce(fn, delay) {
+    let timer;
+
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+    };
+}
+
+function timed(term) {
+    const start = performance.now();
+    const count = search(term).length;
+
+    return {
+        count,
+        ms: performance.now() - start
+    };
+}
+
+let basicRuns = 0, basicTime = 0;
+let debRuns = 0, debTime = 0;
+
+function update() {
+    $("stats").innerHTML =
+        `Basic: ${basicRuns} searches, avg ${
+            (basicTime / basicRuns || 0).toFixed(2)
+        } ms<br>` +
+
+        `Debounced: ${debRuns} searches, avg ${
+            (debTime / debRuns || 0).toFixed(2)
+        } ms`;
+}
+
+$("basic").addEventListener("input", e => {
+    const r = timed(e.target.value.toLowerCase());
+
+    basicRuns++;
+    basicTime += r.ms;
+    update();
+});
+
+const runDebounced = debounce(term => {
+    const r = timed(term);
+
+    debRuns++;
+    debTime += r.ms;
+    update();
+}, 300);
+
+$("debounced").addEventListener("input", e =>
+    runDebounced(e.target.value.toLowerCase())
+);
+
+</script>
+</body>
+</html>

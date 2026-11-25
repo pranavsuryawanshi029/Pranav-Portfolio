@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+<div id="step1">
+    <h3>Step 1: Personal Details</h3>
+    <input id="name" placeholder="Full name">
+    <input id="email" placeholder="Email">
+    <input id="mobile" placeholder="Mobile (10 digits)">
+    <button id="next">Next</button>
+</div>
+
+<div id="step2" style="display:none">
+    <h3>Step 2: Academic Details and Password</h3>
+    <input id="course" placeholder="Course">
+    <input id="password" type="password" placeholder="Password">
+    <input id="confirm" type="password" placeholder="Confirm password">
+    <button id="submit">Submit</button>
+</div>
+
+<div id="preview"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const rules = {
+    name: /^[A-Za-z ]{3,}$/,
+    email: /^[\w.+-]+@[\w-]+\.[\w.]+$/,
+    mobile: /^[6-9]\d{9}$/,
+    course: /^.{2,}$/,
+    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
+};
+
+function check(id) {
+    const ok = rules[id].test($(id).value.trim());
+    $(id).style.borderColor = ok ? "green" : "red";
+    return ok;
+}
+
+$("next").addEventListener("click", () => {
+    if (["name", "email", "mobile"].every(check)) {
+        $("step1").style.display = "none";
+        $("step2").style.display = "block";
+    } else {
+        alert("Please fix the highlighted fields");
+    }
+});
+
+$("submit").addEventListener("click", () => {
+    if (!["course", "password"].every(check))
+        return alert("Check course and password");
+
+    if ($("password").value !== $("confirm").value)
+        return alert("Passwords do not match");
+
+    $("preview").innerHTML = `
+        <h3>Preview</h3>
+        <p>Name: ${$("name").value}</p>
+        <p>Email: ${$("email").value}</p>
+        <p>Mobile: ${$("mobile").value}</p>
+        <p>Course: ${$("course").value}</p>
+    `;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Exam</title>
+</head>
+<body>
+
+<h3 id="timer"></h3>
+<div id="question"></div>
+
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+<button id="submit">Submit</button>
+
+<div id="result"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const bank = [
+    {
+        q: "Which keyword declares a constant?",
+        options: ["var", "let", "const", "static"],
+        answer: 2
+    },
+    {
+        q: "typeof null returns?",
+        options: ["null", "object", "undefined", "number"],
+        answer: 1
+    },
+    {
+        q: "Which method adds an item at the end of an array?",
+        options: ["push", "pop", "shift", "slice"],
+        answer: 0
+    }
+];
+
+const questions = [...bank].sort(() => Math.random() - 0.5);
+const answers = new Array(questions.length).fill(null);
+
+const MARK = 1, NEGATIVE = 0.25;
+
+let current = 0, timeLeft = 60, timer;
+
+function render() {
+    const item = questions[current];
+
+    $("question").innerHTML =
+        `<p>${current + 1}. ${item.q}</p>` +
+        item.options.map((o, i) =>
+            `<label>
+                <input type="radio" name="opt" value="${i}"
+                ${answers[current] === i ? "checked" : ""}>
+                ${o}
+            </label><br>`
+        ).join("");
+
+    document.querySelectorAll('input[name="opt"]').forEach(r =>
+        r.addEventListener("change", () => {
+            answers[current] = Number(r.value);
+        })
+    );
+}
+
+function move(step) {
+    current = Math.min(
+        Math.max(current + step, 0),
+        questions.length - 1
+    );
+    render();
+}
+
+function tick() {
+    timeLeft--;
+    $("timer").textContent = `Time left: ${timeLeft}s`;
+
+    if (timeLeft <= 0) submitExam();
+}
+
+function submitExam() {
+    clearInterval(timer);
+
+    let score = 0, correct = 0, wrong = 0;
+
+    questions.forEach((q, i) => {
+        if (answers[i] === null) return;
+
+        if (answers[i] === q.answer) {
+            score += MARK;
+            correct++;
+        } else {
+            score -= NEGATIVE;
+            wrong++;
+        }
+    });
+
+    const skipped = answers.filter(a => a === null).length;
+
+    $("result").innerHTML = `
+        <h3>Result</h3>
+        <p>Correct: ${correct} | Wrong: ${wrong} | Unattempted: ${skipped}</p>
+        <p>Score: ${score.toFixed(2)} / ${questions.length * MARK}</p>
+    `;
+
+    $("prev").disabled = true;
+    $("next").disabled = true;
+    $("submit").disabled = true;
+}
+
+$("prev").addEventListener("click", () => move(-1));
+$("next").addEventListener("click", () => move(1));
+$("submit").addEventListener("click", submitExam);
+
+render();
+tick();
+timer = setInterval(tick, 1000);
+
+</script>
+</body>
+</html>

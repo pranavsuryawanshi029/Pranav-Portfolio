@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Data Explorer</title>
+</head>
+<body>
+
+<button id="refresh">Refresh</button>
+<input id="search" placeholder="Search name or email">
+
+<p id="status"></p>
+
+<table id="table" border="1"></table>
+
+<button id="prev">Prev</button>
+<span id="pageInfo"></span>
+<button id="next">Next</button>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const API = "https://jsonplaceholder.typicode.com/users";
+const PAGE_SIZE = 4;
+
+let data = [], view = [], page = 1;
+let sortKey = "name", asc = true;
+
+async function loadData() {
+    $("status").textContent = "Loading...";
+
+    try {
+        const res = await fetch(API);
+
+        if (!res.ok)
+            throw new Error("HTTP " + res.status);
+
+        data = await res.json();
+        $("status").textContent = "";
+        applyView();
+
+    } catch (err) {
+        $("status").textContent = "Error: " + err.message;
+    }
+}
+
+function applyView() {
+    const term = $("search").value.toLowerCase();
+
+    view = data.filter(u =>
+        u.name.toLowerCase().includes(term) ||
+        u.email.toLowerCase().includes(term)
+    );
+
+    view.sort((a, b) => {
+        const x = a[sortKey], y = b[sortKey];
+        return (x > y ? 1 : x < y ? -1 : 0) * (asc ? 1 : -1);
+    });
+
+    page = 1;
+    render();
+}
+
+function sortBy(key) {
+    asc = sortKey === key ? !asc : true;
+    sortKey = key;
+    applyView();
+}
+
+function render() {
+    const pages = Math.max(1, Math.ceil(view.length / PAGE_SIZE));
+
+    const slice = view.slice(
+        (page - 1) * PAGE_SIZE,
+        page * PAGE_SIZE
+    );
+
+    $("table").innerHTML =
+        `<tr>
+            <th onclick="sortBy('name')">Name</th>
+            <th onclick="sortBy('email')">Email</th>
+            <th>City</th>
+        </tr>` +
+
+        slice.map(u =>
+            `<tr>
+                <td>${u.name}</td>
+                <td>${u.email}</td>
+                <td>${u.address.city}</td>
+            </tr>`
+        ).join("");
+
+    $("pageInfo").textContent = `Page ${page} of ${pages}`;
+}
+
+function changePage(step) {
+    const pages = Math.max(1, Math.ceil(view.length / PAGE_SIZE));
+
+    page = Math.min(Math.max(page + step, 1), pages);
+    render();
+}
+
+$("refresh").addEventListener("click", loadData);
+$("search").addEventListener("input", applyView);
+$("prev").addEventListener("click", () => changePage(-1));
+$("next").addEventListener("click", () => changePage(1));
+
+loadData();
+
+</script>
+</body>
+</html>

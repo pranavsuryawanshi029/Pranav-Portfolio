@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Undo Redo Editor</title>
+</head>
+<body>
+
+<textarea id="editor" rows="10" cols="60"></textarea>
+<br>
+
+<button id="undo">Undo (Ctrl+Z)</button>
+<button id="redo">Redo (Ctrl+Y)</button>
+
+<h4>Action History</h4>
+<ul id="log"></ul>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const editor = $("editor");
+
+const undoStack = [];
+const redoStack = [];
+
+let lastText = "";
+
+function log(message) {
+    const li = document.createElement("li");
+    li.textContent = `${new Date().toLocaleTimeString()} - ${message}`;
+    $("log").appendChild(li);
+}
+
+function record() {
+    undoStack.push(lastText);
+    lastText = editor.value;
+    redoStack.length = 0;
+    log("Edited text");
+}
+
+function undo() {
+    if (!undoStack.length) return;
+
+    redoStack.push(editor.value);
+    editor.value = lastText = undoStack.pop();
+    log("Undo");
+}
+
+function redo() {
+    if (!redoStack.length) return;
+
+    undoStack.push(editor.value);
+    editor.value = lastText = redoStack.pop();
+    log("Redo");
+}
+
+editor.addEventListener("input", record);
+
+$("undo").addEventListener("click", undo);
+$("redo").addEventListener("click", redo);
+
+document.addEventListener("keydown", e => {
+    if (!e.ctrlKey) return;
+
+    if (e.key === "z") {
+        e.preventDefault();
+        undo();
+    }
+
+    if (e.key === "y") {
+        e.preventDefault();
+        redo();
+    }
+});
+
+</script>
+</body>
+</html>
